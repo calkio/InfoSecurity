@@ -1,0 +1,229 @@
+﻿<Window x:Class="Lab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Lab.ViewModel"
+        xmlns:local="clr-namespace:Lab"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainVM/>
+    </Window.DataContext>
+    <Grid>
+
+        <TabControl>
+            
+            <TabItem>
+
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3"
+                       FontSize="16">1 лаба</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <TabItem.Content>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="70*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Margin="10">
+
+                            <TextBlock Text="Введите шаг:"
+                                       Margin="0 10 0 0"/>
+                            <TextBox Text="{Binding Step}"
+                                     Margin="0 0 0 10"/>
+
+                            <Button Command="{Binding GetCoderCommand}"
+                                    Content="Закодировать"
+                                    Margin="0 10"/>
+
+                            <Button Command="{Binding GetDecoderCommand}"
+                                    Content="Раскодировать"
+                                    Margin="0 10"/>
+
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1"
+                                    Margin="10">
+
+                            <TextBlock Text="Вывод информации:"
+                                       Margin="10"
+                                       FontSize="22"/>
+
+                            <TextBox Text="{Binding Data}"
+                                     FontSize="16"
+                                     TextWrapping="Wrap"/>
+
+
+                        </StackPanel>
+
+                        <DataGrid Grid.Column="1"
+                                  AutoGenerateColumns="False" 
+                                  Margin="10 100 10 10"
+                                  ItemsSource="{Binding ZXC}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="K" Binding="{Binding Key}" />
+                                <DataGridTextColumn Header="Probability" Binding="{Binding Value}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem>
+
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3"
+                                   FontSize="16">2 лаба</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <TabItem.Content>
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Margin="10">
+
+                            <StackPanel>
+
+                                <Label Content="Введите текст:"
+                                       FontSize="16"/>
+                                <TextBox Text="{Binding InputTextLab2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                           FontSize="16"/>
+
+                                <Label Content="Результат:"
+                                       Margin="0 10 0 0"
+                                       FontSize="16"/>
+                                <TextBox Text="{Binding OutputTextLab2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         FontSize="16"/>
+
+                                <Label Content="Энтропия ввода"
+                                       Margin="0 10 0 0"
+                                       FontSize="16"/>
+                                <TextBox Text="{Binding EntropyLab2Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         FontSize="16"/>
+
+                                <Label Content="Энтропия вывода"
+                                       Margin="0 10 0 0"
+                                       FontSize="16"/>  
+                                <TextBox Text="{Binding EntropyLab2Output, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         FontSize="16"/>
+
+                            </StackPanel>
+
+                            <StackPanel Margin="0 50 0 0">
+
+                                <Button Command="{Binding GetCoderLab2Command}"
+                                        FontSize="16"
+                                        Content="Кодер"/>
+
+                                <Button Command="{Binding GetDecoderLab2Command}"
+                                        Margin="0 10 0 0"
+                                        FontSize="16"
+                                        Content="Декодер"/>       
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+
+                    </Grid>
+                    
+                </TabItem.Content>
+                
+            </TabItem>
+
+            <TabItem Header="Побитовое">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="5">
+                        <Label Content="Исходная строка" Margin="0, 0, 0, 5"/>
+                        <TextBox Text="{Binding startMessage}"/>
+                    </StackPanel>
+
+                    <ScrollViewer Grid.Row="1">
+                        <DataGrid Margin="10, 0, 10, 0" Name="DG" AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn Binding="{Binding Path=Symbol}"  MinWidth="80">
+                                    <DataGridTextColumn.Header>
+                                        <DataGridColumnHeader Content="Символ" HorizontalAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Binding="{Binding Path=KodTen}" MinWidth="80">
+                                    <DataGridTextColumn.Header>
+                                        <DataGridColumnHeader Content="Код10" HorizontalAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Binding="{Binding Path=KodTwo}" MinWidth="80">
+                                    <DataGridTextColumn.Header>
+                                        <DataGridColumnHeader Content="Код2" HorizontalAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Binding="{Binding Path=LeftByte}"  MinWidth="80">
+                                    <DataGridTextColumn.Header>
+                                        <DataGridColumnHeader Content="Левый" HorizontalAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Binding="{Binding Path=RightByte}"  MinWidth="80">
+                                    <DataGridTextColumn.Header>
+                                        <DataGridColumnHeader Content="Правый" HorizontalAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Binding="{Binding Path=XORByte}"  MinWidth="80">
+                                    <DataGridTextColumn.Header>
+                                        <DataGridColumnHeader Content="XOR" HorizontalAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Row="2" Margin="5">
+                        <Label Content="Выходная строка" Margin="0, 0, 0, 5"/>
+                        <TextBox Text="{Binding cryptoMessage}" IsReadOnly="True"/>
+
+                        <Grid Margin="0, 10, 0, 0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Command="{Binding GetOpenTextCommand}" Content="Зашифровать" 
+                        Margin="10, 0, 10, 0" Height="40"/>
+                            <Button Command="{Binding GetDecryptCommand}" Content="Расшифровать" 
+                        Margin="10, 0, 10, 0" Grid.Column="1"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>
