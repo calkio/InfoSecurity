@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace Lab
         public MainWindow()
         {
             InitializeComponent();
+            MainVM lab3VM = new MainVM();
+            Lab3.DataContext = lab3VM;
+            DG.ItemsSource = lab3VM.Strochechki;
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Caesar;
 using Cryptanalysis.DataAccessAlphabet.Calculete;
+using Lab.Entity;
 using Lab.Infastructure;
 using Lab.ViewModel.Base;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +50,23 @@ namespace Lab.ViewModel
 
         #endregion
 
-        #region Lab 1
+        #region Lab3
+
+        public ObservableCollection<Strochechka> Strochechki = new ObservableCollection<Strochechka>();
+        private Dictionary<char, string> symbols = new Dictionary<char, string>();
+
+        private string _startMessage;
+        public string startMessage { get => _startMessage; set => Set(ref _startMessage, value); }
+
+
+        private string _cryptoMessage;
+        public string cryptoMessage { get => _cryptoMessage; set => Set(ref _cryptoMessage, value); }
+
+        #endregion
+
+
+
+        #region Lab1 КОМАНДЫ
 
         public ICommand GetCoderCommand { get; }
 
@@ -81,7 +99,7 @@ namespace Lab.ViewModel
 
         #endregion
 
-        #region Lab2
+        #region Lab2 КОМАНДЫ
 
         public ICommand GetCoderLab2Command { get; }
 
@@ -112,14 +130,123 @@ namespace Lab.ViewModel
 
         #endregion
 
+        #region Lab3 КОМАНДЫ
 
+        #region Расшифровать
+
+        public ICommand GetDecryptCommand { get; }
+        private bool CanODecryptCommand(object p)
+        {
+            if (true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void OnDecryptCommand(object p)
+        {
+            symbols = GetUniqueChars(_startMessage);
+            RunMainCreateDe();
+            RunEncript();
+        }
+
+        private void RunMainCreateDe()
+        {
+            Strochechki.Clear();
+            foreach (var item in symbols)
+            {
+                string kod2 = Convert.ToString(item.Key, 2).PadLeft(16, '0');
+                int left = item.Key >> 8;
+                int right = item.Key & 0xff;
+                int xor = left ^ right;
+                Strochechki.Add(new Strochechka(item.Key.ToString(), item.Key, kod2, left, right, xor));
+                symbols[item.Key] = ((char)((xor << 8) | left)).ToString();
+            }
+        }
+
+        #endregion
+
+        #region  зашифровать
+
+        public ICommand GetOpenTextCommand { get; }
+        private bool CanOpenTextCommand(object p)
+        {
+            if (true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void OnOpenTextCommand(object p)
+        {
+            symbols = GetUniqueChars(_startMessage);
+            RunMainCreate();
+            RunEncript();
+        }
+
+        private void RunMainCreate()
+        {
+            Strochechki.Clear();
+            foreach (var item in symbols)
+            {
+                string kod2 = Convert.ToString(item.Key, 2).PadLeft(16, '0');
+                int left = item.Key >> 8;
+                int right = item.Key & 0xff;
+                int xor = left ^ right;
+                Strochechki.Add(new Strochechka(item.Key.ToString(), item.Key, kod2, left, right, xor));
+                symbols[item.Key] = ((char)((right << 8) | xor)).ToString();
+            }
+        }
+
+        private void RunEncript()
+        {
+            string message = startMessage;
+            _cryptoMessage = "";
+
+            foreach (var item in message)
+            {
+                _cryptoMessage += symbols[item].ToString();
+            }
+
+            OnPropertyChanged(nameof(cryptoMessage));
+        }
+
+
+
+        static Dictionary<char, string> GetUniqueChars(string input)
+        {
+            Dictionary<char, string> uniqueChars = new Dictionary<char, string>();
+
+            foreach (char c in input)
+            {
+                if (!uniqueChars.ContainsKey(c))
+                {
+                    uniqueChars.Add(c, "");
+                }
+            }
+
+            return uniqueChars;
+        }
+        #endregion
+
+        #endregion
 
         public MainVM()
         {
             GetCoderCommand = new LambdaCommand(OnCoderCommand, CanCoderCommand);
             GetDecoderCommand = new LambdaCommand(OnDecoderCommand, CanDecoderCommand);
+
             GetCoderLab2Command = new LambdaCommand(OnCoderLab2Command, CanCoderLab2Command);
             GetDecoderLab2Command = new LambdaCommand(OnDecoderLab2Command, CanDecoderLab2Command);
+
+            GetOpenTextCommand = new LambdaCommand(OnOpenTextCommand, CanOpenTextCommand);
+            GetDecryptCommand = new LambdaCommand(OnDecryptCommand, CanODecryptCommand);
         }
     }
 }

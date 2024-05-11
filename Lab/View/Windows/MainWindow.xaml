@@ -19,7 +19,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="3"
-                       FontSize="16">1 лаба</TextBlock>
+                       FontSize="16">Цезарь</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
 
@@ -82,7 +82,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="3"
-                                   FontSize="16">2 лаба</TextBlock>
+                                   FontSize="16">Сим. шифры</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
 
@@ -146,7 +146,17 @@
                 
             </TabItem>
 
-            <TabItem Header="Побитовое">
+            <TabItem Name="Lab3">
+
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3"
+                                   FontSize="16">
+                            Побитовые
+                        </TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
@@ -215,7 +225,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Button Command="{Binding GetOpenTextCommand}" Content="Зашифровать" 
-                        Margin="10, 0, 10, 0" Height="40"/>
+                        Margin="10, 0, 10, 0" Height="30"/>
                             <Button Command="{Binding GetDecryptCommand}" Content="Расшифровать" 
                         Margin="10, 0, 10, 0" Grid.Column="1"/>
                         </Grid>
