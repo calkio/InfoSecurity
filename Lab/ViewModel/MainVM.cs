@@ -162,7 +162,8 @@ namespace Lab.ViewModel
                 int left = item.Key >> 8;
                 int right = item.Key & 0xff;
                 int xor = left ^ right;
-                Strochechki.Add(new Strochechka(item.Key.ToString(), item.Key, kod2, left, right, xor));
+                string kod22 = Convert.ToString(xor, 2).PadLeft(8, '0') + Convert.ToString(left, 2).PadLeft(8, '0');
+                Strochechki.Add(new Strochechka(item.Key.ToString(), item.Key, kod2, kod22, left, right, xor));
                 symbols[item.Key] = ((char)((xor << 8) | left)).ToString();
             }
         }
@@ -199,7 +200,8 @@ namespace Lab.ViewModel
                 int left = item.Key >> 8;
                 int right = item.Key & 0xff;
                 int xor = left ^ right;
-                Strochechki.Add(new Strochechka(item.Key.ToString(), item.Key, kod2, left, right, xor));
+                string kod22 = Convert.ToString(right, 2).PadLeft(8, '0') + Convert.ToString(xor, 2).PadLeft(8, '0');
+                Strochechki.Add(new Strochechka(item.Key.ToString(), item.Key, kod2, kod22, left, right, xor));
                 symbols[item.Key] = ((char)((right << 8) | xor)).ToString();
             }
         }

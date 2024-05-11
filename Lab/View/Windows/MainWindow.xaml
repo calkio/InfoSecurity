@@ -187,7 +187,13 @@
 
                                 <DataGridTextColumn Binding="{Binding Path=KodTwo}" MinWidth="80">
                                     <DataGridTextColumn.Header>
-                                        <DataGridColumnHeader Content="Код2" HorizontalAlignment="Center"/>
+                                        <DataGridColumnHeader Content="Исходный двоичный" HorizontalAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Binding="{Binding Path=KodTwo2}" MinWidth="80">
+                                    <DataGridTextColumn.Header>
+                                        <DataGridColumnHeader Content="Преобразованый двоичный" HorizontalAlignment="Center"/>
                                     </DataGridTextColumn.Header>
                                 </DataGridTextColumn>
 

@@ -17,6 +17,9 @@ namespace Lab.Entity
         private string _kodTwo;
         public string KodTwo { get => _kodTwo; set => _kodTwo = value; }
 
+        private string _kodTwo2;
+        public string KodTwo2 { get => _kodTwo2; set => _kodTwo2 = value; }
+
         private int _leftByte = new int();
         public int LeftByte { get => _leftByte; set => _leftByte = value; }
 
@@ -26,11 +29,12 @@ namespace Lab.Entity
         private int _XORByte = new int();
         public int XORByte { get => _XORByte; set => _XORByte = value; }
 
-        public Strochechka(string symbol, int kod10, string kod2, int left, int rifht, int xor)
+        public Strochechka(string symbol, int kod10, string kod2, string kod22, int left, int rifht, int xor)
         {
             _symbols = symbol;
             _kodTen = kod10;
             _kodTwo = kod2;
+            _kodTwo2 = kod22;
             _leftByte = left;
             _rightByte = rifht;
             _XORByte = xor;
