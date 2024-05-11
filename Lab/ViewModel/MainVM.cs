@@ -1,5 +1,6 @@
 ﻿using Caesar;
 using Cryptanalysis.DataAccessAlphabet.Calculete;
+using Euclid;
 using Lab.Entity;
 using Lab.Infastructure;
 using Lab.ViewModel.Base;
@@ -7,6 +8,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,6 +63,21 @@ namespace Lab.ViewModel
 
         private string _cryptoMessage;
         public string cryptoMessage { get => _cryptoMessage; set => Set(ref _cryptoMessage, value); }
+
+        #endregion
+
+        #region Lab4
+
+        private int _inputA;
+        public int InputA { get => _inputA; set => Set(ref _inputA, value); }
+
+
+        private int _inputB;
+        public int InputB { get => _inputB; set => Set(ref _inputB, value); }
+
+
+        private ObservableCollection<EuclidEntity> _euclids = new ObservableCollection<EuclidEntity>();
+        public ObservableCollection<EuclidEntity> Euclids { get => _euclids; set => Set(ref _euclids, value); }
 
         #endregion
 
@@ -239,6 +256,78 @@ namespace Lab.ViewModel
 
         #endregion
 
+        #region Lab4 КОМАНДЫ
+
+        public ICommand GetRegularEuclidCommand { get; }
+        private bool CanORegularEuclidCommand(object p)
+        {
+            if (InputA > 0 && _inputB > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void OnRegularEuclidCommand(object p)
+        {
+            RegularEuclid regularEuclid = new RegularEuclid();
+            (int nod, Stopwatch time) = regularEuclid.CalculeteRegularEuclid(InputA, InputB);
+
+            EuclidEntity euclidEntity = new EuclidEntity(InputA, InputB, nod, time, 1);
+            Euclids.Add(euclidEntity);
+            
+        }
+
+
+        public ICommand GetExtendedEuclidFirstCommand { get; }
+        private bool CanOExtendedEuclidFirstCommand(object p)
+        {
+            if (InputA > 0 && _inputB > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void OnExtendedEuclidFirstCommand(object p)
+        {
+            ExtendedEuclidFirst extendedEuclidFirst = new ExtendedEuclidFirst();
+            (int nod, Stopwatch time) = extendedEuclidFirst.CalculeteExtendedEuclidFirst(InputA, InputB);
+
+            EuclidEntity euclidEntity = new EuclidEntity(InputA, InputB, nod, time, 2);
+            Euclids.Add(euclidEntity);
+
+        }
+
+
+        public ICommand GetExtendedEuclidSecondCommand { get; }
+        private bool CanOExtendedEuclidSecondCommand(object p)
+        {
+            if (InputA > 0 && _inputB > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void OnExtendedEuclidSecondCommand(object p)
+        {
+            ExtendedEuclidSecond extendedEuclidSecond = new ExtendedEuclidSecond();
+            (int nod, Stopwatch time) = extendedEuclidSecond.CalculeteExtendedEuclidFirst(InputA, InputB);
+
+            EuclidEntity euclidEntity = new EuclidEntity(InputA, InputB, nod, time, 2);
+            Euclids.Add(euclidEntity);
+
+        }
+
+        #endregion
+
         public MainVM()
         {
             GetCoderCommand = new LambdaCommand(OnCoderCommand, CanCoderCommand);
@@ -249,6 +338,10 @@ namespace Lab.ViewModel
 
             GetOpenTextCommand = new LambdaCommand(OnOpenTextCommand, CanOpenTextCommand);
             GetDecryptCommand = new LambdaCommand(OnDecryptCommand, CanODecryptCommand);
+
+            GetRegularEuclidCommand = new LambdaCommand(OnRegularEuclidCommand, CanORegularEuclidCommand);
+            GetExtendedEuclidFirstCommand = new LambdaCommand(OnExtendedEuclidFirstCommand, CanOExtendedEuclidFirstCommand);
+            GetExtendedEuclidSecondCommand = new LambdaCommand(OnExtendedEuclidSecondCommand, CanOExtendedEuclidSecondCommand);
         }
     }
 }

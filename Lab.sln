@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cryptanalysis", "Cryptanaly
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trithemius", "Trithemius\Trithemius.csproj", "{2A13C7CA-91CF-4CC0-8D3A-3497E0A7C342}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euclid", "Euclid\Euclid.csproj", "{1B0A8D77-33FF-4574-951C-DEA3DA2FC766}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2A13C7CA-91CF-4CC0-8D3A-3497E0A7C342}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A13C7CA-91CF-4CC0-8D3A-3497E0A7C342}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A13C7CA-91CF-4CC0-8D3A-3497E0A7C342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B0A8D77-33FF-4574-951C-DEA3DA2FC766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B0A8D77-33FF-4574-951C-DEA3DA2FC766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B0A8D77-33FF-4574-951C-DEA3DA2FC766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B0A8D77-33FF-4574-951C-DEA3DA2FC766}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

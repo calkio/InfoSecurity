@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Caesar\Caesar.csproj" />
     <ProjectReference Include="..\Cryptanalysis\Cryptanalysis.csproj" />
+    <ProjectReference Include="..\Euclid\Euclid.csproj" />
     <ProjectReference Include="..\Trithemius\Trithemius.csproj" />
   </ItemGroup>
 
