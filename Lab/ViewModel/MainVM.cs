@@ -4,6 +4,7 @@ using Euclid;
 using Lab.Entity;
 using Lab.Infastructure;
 using Lab.ViewModel.Base;
+using LFSR;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -81,6 +82,24 @@ namespace Lab.ViewModel
 
         #endregion
 
+
+        #region Lab5
+
+        private uint _inputValueLab5;
+
+
+        private string _inputTextLab5;
+        public string InputTextLab5 { get => _inputTextLab5; set => Set(ref _inputTextLab5, value); }
+
+
+        private string _outputTextLab5;
+        public string OutputTextLab5 { get => _outputTextLab5; set => Set(ref _outputTextLab5, value); }
+
+
+        private ObservableCollection<LFSRResult> _lFSRResults = new ObservableCollection<LFSRResult>();
+        public ObservableCollection<LFSRResult> LFSRResults { get => _lFSRResults; set => Set(ref _lFSRResults, value); }
+
+        #endregion
 
 
         #region Lab1 КОМАНДЫ
@@ -328,6 +347,28 @@ namespace Lab.ViewModel
 
         #endregion
 
+        #region Lab5 КОМАНДЫ
+
+        public ICommand GetLFSRCommand { get; }
+        private bool CanOLFSRCommand(object p)
+        {
+            if (uint.TryParse(_inputTextLab5, out _inputValueLab5))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void OnLFSRCommand(object p)
+        {
+            FlowLFSR flowLFSR = new FlowLFSR(_inputValueLab5);
+            LFSRResults = new ObservableCollection<LFSRResult>(flowLFSR.RunLFSR(100));
+        }
+
+        #endregion
+
         public MainVM()
         {
             GetCoderCommand = new LambdaCommand(OnCoderCommand, CanCoderCommand);
@@ -342,6 +383,8 @@ namespace Lab.ViewModel
             GetRegularEuclidCommand = new LambdaCommand(OnRegularEuclidCommand, CanORegularEuclidCommand);
             GetExtendedEuclidFirstCommand = new LambdaCommand(OnExtendedEuclidFirstCommand, CanOExtendedEuclidFirstCommand);
             GetExtendedEuclidSecondCommand = new LambdaCommand(OnExtendedEuclidSecondCommand, CanOExtendedEuclidSecondCommand);
+
+            GetLFSRCommand = new LambdaCommand(OnLFSRCommand, CanOLFSRCommand);
         }
     }
 }

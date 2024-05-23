@@ -327,6 +327,73 @@
                 
             </TabItem>
 
+            <TabItem>
+
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3"
+                                   FontSize="16">LFSR</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <TabItem.Content>
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20*"/>
+                                <RowDefinition Height="70*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0"
+                                        Margin="15">
+
+                                <Label Content="Введите положительное число:"/>
+                                <TextBox Text="{Binding InputTextLab5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            </StackPanel>
+
+                            <DataGrid Grid.Row="1" 
+                                      Margin="15"
+                                      ItemsSource="{Binding LFSRResults}"
+                                      AutoGenerateColumns="False"
+                                      CanUserAddRows="False">
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Итерация" Width="70" Binding="{Binding Path=Iteration}"/>
+                                    <DataGridTextColumn Header="Десятичное" Width="100" Binding="{Binding Path=DecimalValue}"/>
+                                    <DataGridTextColumn Header="Двоичное" Width="*" Binding="{Binding Path=BinaryValue}"/>
+                                    <DataGridTextColumn Header="Выходной бит" Width="110" Binding="{Binding Path=OutputBit}"/>
+                                </DataGrid.Columns>
+
+                            </DataGrid>
+
+                        </Grid>
+
+                        <StackPanel Grid.Column="1"
+                                    Margin="15">
+
+
+                            <Button Content="Зашифровать"
+                                    Margin="0 15"
+                                    Command="{Binding GetLFSRCommand}"/>
+
+
+                        </StackPanel>
+                        
+                    </Grid>
+                    
+                </TabItem.Content>
+
+            </TabItem>
+
         </TabControl>
 
     </Grid>
