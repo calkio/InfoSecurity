@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trithemius", "Trithemius\Tr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Euclid", "Euclid\Euclid.csproj", "{1B0A8D77-33FF-4574-951C-DEA3DA2FC766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFSR", "LFSR\LFSR.csproj", "{79DAC89A-215E-4B90-9674-D4E25D8F3F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LFSR", "LFSR\LFSR.csproj", "{79DAC89A-215E-4B90-9674-D4E25D8F3F2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffieHellman", "DiffieHellman\DiffieHellman.csproj", "{E5627AC2-FAAD-482F-9F3C-5293E6943636}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{79DAC89A-215E-4B90-9674-D4E25D8F3F2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79DAC89A-215E-4B90-9674-D4E25D8F3F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79DAC89A-215E-4B90-9674-D4E25D8F3F2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5627AC2-FAAD-482F-9F3C-5293E6943636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5627AC2-FAAD-482F-9F3C-5293E6943636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5627AC2-FAAD-482F-9F3C-5293E6943636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5627AC2-FAAD-482F-9F3C-5293E6943636}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿using Caesar;
 using Cryptanalysis.DataAccessAlphabet.Calculete;
+using DiffieHellman;
 using Euclid;
 using Lab.Entity;
 using Lab.Infastructure;
@@ -82,7 +83,6 @@ namespace Lab.ViewModel
 
         #endregion
 
-
         #region Lab5
 
         private uint _inputValueLab5;
@@ -98,6 +98,14 @@ namespace Lab.ViewModel
 
         private ObservableCollection<LFSRResult> _lFSRResults = new ObservableCollection<LFSRResult>();
         public ObservableCollection<LFSRResult> LFSRResults { get => _lFSRResults; set => Set(ref _lFSRResults, value); }
+
+        #endregion
+
+
+        #region Lab6
+
+        private ObservableCollection<DiffieHellmanEntity> _diffieHellmanEntities = new ObservableCollection<DiffieHellmanEntity>();
+        public ObservableCollection<DiffieHellmanEntity> DiffieHellmanEntities { get => _diffieHellmanEntities; set => Set(ref _diffieHellmanEntities, value); }
 
         #endregion
 
@@ -369,6 +377,21 @@ namespace Lab.ViewModel
 
         #endregion
 
+        #region Lab6 КОМАНДЫ
+
+        public ICommand GetDiffieHellmanCommand { get; }
+        private bool CanODiffieHellmanCommand(object p) => true;
+        private void OnDiffieHellmanCommand(object p)
+        {
+            CalculeteDiffieHellman calculeteDiffieHellman = new CalculeteDiffieHellman();
+            DiffieHellmanEntities.Add(calculeteDiffieHellman.CalculetePublicFirst());
+            DiffieHellmanEntities.Add(calculeteDiffieHellman.CalculetePublicSecond());
+        }
+
+        #endregion
+
+
+
         public MainVM()
         {
             GetCoderCommand = new LambdaCommand(OnCoderCommand, CanCoderCommand);
@@ -385,6 +408,8 @@ namespace Lab.ViewModel
             GetExtendedEuclidSecondCommand = new LambdaCommand(OnExtendedEuclidSecondCommand, CanOExtendedEuclidSecondCommand);
 
             GetLFSRCommand = new LambdaCommand(OnLFSRCommand, CanOLFSRCommand);
+
+            GetDiffieHellmanCommand = new LambdaCommand(OnDiffieHellmanCommand, CanODiffieHellmanCommand);
         }
     }
 }

@@ -394,6 +394,54 @@
 
             </TabItem>
 
+
+            <TabItem>
+
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3"
+                                   FontSize="16">Диффи Хеллмана</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <TabItem.Content>
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <DataGrid Grid.Column="0"
+                                  Margin="15"
+                                  ItemsSource="{Binding DiffieHellmanEntities}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Номер"  Width="60" Binding="{Binding Path=NumerUser}"/>
+                                <DataGridTextColumn Header="Приватный ключ" Width="*" Binding="{Binding Path=PrivateKey}"/>
+                                <DataGridTextColumn Header="Публичный ключ" Width="*" Binding="{Binding Path=PublicKey}"/>
+                                <DataGridTextColumn Header="Сеансовый ключ" Width="*" Binding="{Binding Path=SharedKey}"/>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+                        <StackPanel Grid.Column="1"
+                                    Margin="15">
+
+                            <Button Content="Сгенирировать ключи"
+                                    Command="{Binding GetDiffieHellmanCommand}"/>
+
+                        </StackPanel>
+                        
+                    </Grid>
+                    
+                </TabItem.Content>
+
+            </TabItem>
+            
         </TabControl>
 
     </Grid>
