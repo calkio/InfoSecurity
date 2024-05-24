@@ -5,6 +5,7 @@ using Euclid;
 using Lab.Entity;
 using Lab.Infastructure;
 using Lab.ViewModel.Base;
+using LechmanTest;
 using LFSR;
 using Microsoft.Win32;
 using System;
@@ -101,13 +102,42 @@ namespace Lab.ViewModel
 
         #endregion
 
-
         #region Lab6
 
         private ObservableCollection<DiffieHellmanEntity> _diffieHellmanEntities = new ObservableCollection<DiffieHellmanEntity>();
         public ObservableCollection<DiffieHellmanEntity> DiffieHellmanEntities { get => _diffieHellmanEntities; set => Set(ref _diffieHellmanEntities, value); }
 
         #endregion
+
+
+        #region Lab7
+
+        private int _n;
+        public int N { get => _n; set => Set(ref _n, value); }
+
+
+        private int _countIterations;
+        public int CountIterations { get => _countIterations; set => Set(ref _countIterations, value); }
+
+
+        private string _isSimple;
+        public string IsSimple { get => _isSimple; set => Set(ref _isSimple, value); }
+
+
+        private int _countIsSimple;
+        public int CountIsSimple { get => _countIsSimple; set => Set(ref _countIsSimple, value); }
+
+
+        private int _countIsNotSimple;
+        public int CountIsNotSimple { get => _countIsNotSimple; set => Set(ref _countIsNotSimple, value); }
+
+
+        private ObservableCollection<LechmanTestEntity> _lechmanTestEntitys = new ObservableCollection<LechmanTestEntity>();
+        public ObservableCollection<LechmanTestEntity> LechmanTestEntitys { get => _lechmanTestEntitys; set => Set(ref _lechmanTestEntitys, value); }
+
+        #endregion
+
+
 
 
         #region Lab1 КОМАНДЫ
@@ -390,7 +420,31 @@ namespace Lab.ViewModel
 
         #endregion
 
+        #region Lab6 КОМАНДЫ
 
+        public ICommand GetLechmanTestCommand { get; }
+        private bool CanOLechmanTestCommand(object p)
+        {
+            if (_n > 0 && _n != null && _countIterations > 0 && _countIterations != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void OnLechmanTestCommand(object p)
+        {
+            CalculeteLechmanTest calculeteLechmanTest = new CalculeteLechmanTest();
+            LechmanTestEntitys = new ObservableCollection<LechmanTestEntity>(calculeteLechmanTest.CheakSimpleValue(_n, _countIterations));
+            IsSimple = (LechmanTestEntitys.Any(entity => entity.IsSimple)) ? "Не найдено составное число" : "Найдено составное число";
+
+            CountIsSimple = LechmanTestEntitys.Count(entity => entity.IsSimple);
+            CountIsNotSimple = LechmanTestEntitys.Count(entity => !entity.IsSimple);
+        }
+
+        #endregion
 
         public MainVM()
         {
@@ -410,6 +464,8 @@ namespace Lab.ViewModel
             GetLFSRCommand = new LambdaCommand(OnLFSRCommand, CanOLFSRCommand);
 
             GetDiffieHellmanCommand = new LambdaCommand(OnDiffieHellmanCommand, CanODiffieHellmanCommand);
+
+            GetLechmanTestCommand = new LambdaCommand(OnLechmanTestCommand, CanOLechmanTestCommand);
         }
     }
 }

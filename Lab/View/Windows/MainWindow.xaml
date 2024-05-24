@@ -441,7 +441,75 @@
                 </TabItem.Content>
 
             </TabItem>
-            
+
+
+            <TabItem>
+
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3"
+                       FontSize="16">Тесты простоты Лехмана</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <TabItem.Content>
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <DataGrid Grid.Column="0"
+                      Margin="15"
+                      ItemsSource="{Binding LechmanTestEntitys}"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Номер"  Width="60" Binding="{Binding Path=Number}"/>
+                                <DataGridTextColumn Header="A" Width="*" Binding="{Binding Path=A}"/>
+                                <DataGridTextColumn Header="R" Width="*" Binding="{Binding Path=R}"/>
+                                <DataGridTextColumn Header="Составное число" Width="*" Binding="{Binding Path=IsSimple}"/>
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+                        <StackPanel Grid.Column="1"
+                                    Margin="15">
+
+                            <Label Content="Введите число:"/>
+                            <TextBox Text="{Binding N, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="0 0 0 15"/>
+
+                            <Label Content="Введите количсетво проверок:"/>
+                            <TextBox Text="{Binding CountIterations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="0 0 0 15"/>
+
+                            <Label Content="{Binding IsSimple}"
+                                   Margin="0 0 0 15"/>
+
+
+                            <Label Content="Количество составных:"/>
+                            <Label Content="{Binding CountIsSimple}"
+                                   Margin="0 0 0 15"/>
+
+                            <Label Content="Количество не составных:"/>
+                            <Label Content="{Binding CountIsNotSimple}"
+                                   Margin="0 0 0 15"/>
+
+                            <Button Content="Проверить число"
+                                    Command="{Binding GetLechmanTestCommand}"/>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </TabItem.Content>
+
+            </TabItem>
+
         </TabControl>
 
     </Grid>

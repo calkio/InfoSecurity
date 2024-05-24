@@ -28,6 +28,7 @@ namespace DiffieHellman
 
         public DiffieHellmanEntity CalculetePublicFirst()
         {
+            //BigInteger sharedKey = (BigInteger)Math.Pow((int)_publicKeySecond, (int)_privateKeyFirst) % _p;
             BigInteger sharedKey = ModExp(_publicKeySecond, _privateKeyFirst, _p);
             DiffieHellmanEntity diffieHellmanEntity = new DiffieHellmanEntity(1, _privateKeyFirst, _publicKeyFirst, sharedKey);
             return diffieHellmanEntity;
@@ -35,6 +36,7 @@ namespace DiffieHellman
 
         public DiffieHellmanEntity CalculetePublicSecond()
         {
+            //BigInteger sharedKey= (BigInteger)Math.Pow((int)_publicKeyFirst, (int)_privateKeySecond) % _p;
             BigInteger sharedKey = ModExp(_publicKeyFirst, _privateKeySecond, _p);
             DiffieHellmanEntity diffieHellmanEntity = new DiffieHellmanEntity(2, _privateKeySecond, _publicKeySecond, sharedKey);
             return diffieHellmanEntity;
@@ -44,6 +46,8 @@ namespace DiffieHellman
 
         private void InitPublicKey()
         {
+            //_publicKeyFirst = (BigInteger)Math.Pow((int)_g, (int)_privateKeyFirst) % _p;
+            //_publicKeySecond = (BigInteger)Math.Pow((int)_g, (int)_privateKeySecond) % _p;
             _publicKeyFirst = ModExp(_g, _privateKeyFirst, _p);
             _publicKeySecond = ModExp(_g, _privateKeySecond, _p);
         }
@@ -54,7 +58,7 @@ namespace DiffieHellman
             _privateKeySecond = GenerateRandomBigInteger(1, _p - 1);
         }
 
-        static BigInteger GenerateRandomBigInteger(BigInteger minValue, BigInteger maxValue)
+        private BigInteger GenerateRandomBigInteger(BigInteger minValue, BigInteger maxValue)
         {
             RandomNumberGenerator rng = RandomNumberGenerator.Create();
             byte[] bytes = maxValue.ToByteArray();
@@ -73,7 +77,7 @@ namespace DiffieHellman
 
         // Метод для быстрого возведения в степень по модулю
         // Для вычисления 5^6 mod(23), сначала возводим 5 в степень 6, получаем 15625, затем делим 15625 на 23, получаем целую часть 679, умножаем 679 на 23, получаем 15617, и наконец, вычитаем 15617 из 15625, получаем результат 8.
-        static BigInteger ModExp(BigInteger baseValue, BigInteger exponent, BigInteger modulus)
+        private BigInteger ModExp(BigInteger baseValue, BigInteger exponent, BigInteger modulus)
         {
             BigInteger result = 1;
             baseValue = baseValue % modulus;
