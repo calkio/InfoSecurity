@@ -38,6 +38,10 @@ namespace Euclid
 
             while (u3 != 1 && maxCount > currentCount)
             {
+                if (v3 == 0)
+                {
+                    throw new Exception("Деление на 0 (v3)");
+                }
                 q = u3 / v3;
 
                 t1 = u1 - v1 * q;

@@ -39,6 +39,7 @@ namespace LFSR
             for (int i = 0; i < cycles; i++)
             {
                 int outputBit = LFSR(); // Обновляем регистр и получаем выходной бит
+                _shiftRegister = _shiftRegister ^ (uint)(outputBit == 1 ? uint.MaxValue : 0);
                 results.Add(new LFSRResult
                 {
                     Iteration = i + 1,

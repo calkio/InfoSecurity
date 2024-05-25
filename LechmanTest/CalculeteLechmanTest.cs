@@ -19,7 +19,7 @@ namespace LechmanTest
                 BigInteger exponent = (BigInteger)Math.Pow((int)a, (int)(n - 1) / 2);
                 BigInteger r = exponent % n;
 
-                LechmanTestEntity lechmanTestEntity = new LechmanTestEntity(i + 1, a, r, (r == 1 || r == -1) ? false : true);
+                LechmanTestEntity lechmanTestEntity = new LechmanTestEntity(i + 1, a, r, (r == 1 || r == n-1) ? false : true);
                 lechmanTestEntities.Add(lechmanTestEntity);
             }
 

@@ -13,7 +13,7 @@ namespace DiffieHellman
         private BigInteger _g = BigInteger.Parse("5"); // Простое число
         private BigInteger _p = BigInteger.Parse("23"); // Сильно простое число (p - простое и (p-1)/2 - тоже простое)
 
-        private BigInteger _privateKeyFirst; 
+        private BigInteger _privateKeyFirst;
         private BigInteger _privateKeySecond;
 
         private BigInteger _publicKeyFirst;

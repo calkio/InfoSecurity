@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Lab.ViewModel
@@ -89,8 +90,17 @@ namespace Lab.ViewModel
         private uint _inputValueLab5;
 
 
+        private string _inputTextLab52;
+        public string InputTextLab52 { get => _inputTextLab52; set => Set(ref _inputTextLab52, value); }
+
+
         private string _inputTextLab5;
         public string InputTextLab5 { get => _inputTextLab5; set => Set(ref _inputTextLab5, value); }
+
+
+
+        private string _outputTextLab52;
+        public string OutputTextLab52 { get => _outputTextLab52; set => Set(ref _outputTextLab52, value); }
 
 
         private string _outputTextLab5;
@@ -108,7 +118,6 @@ namespace Lab.ViewModel
         public ObservableCollection<DiffieHellmanEntity> DiffieHellmanEntities { get => _diffieHellmanEntities; set => Set(ref _diffieHellmanEntities, value); }
 
         #endregion
-
 
         #region Lab7
 
@@ -136,7 +145,6 @@ namespace Lab.ViewModel
         public ObservableCollection<LechmanTestEntity> LechmanTestEntitys { get => _lechmanTestEntitys; set => Set(ref _lechmanTestEntitys, value); }
 
         #endregion
-
 
 
 
@@ -376,11 +384,16 @@ namespace Lab.ViewModel
         private void OnExtendedEuclidSecondCommand(object p)
         {
             ExtendedEuclidSecond extendedEuclidSecond = new ExtendedEuclidSecond();
-            (int nod, Stopwatch time) = extendedEuclidSecond.CalculeteExtendedEuclidFirst(InputA, InputB);
-
-            EuclidEntity euclidEntity = new EuclidEntity(InputA, InputB, nod, time, 2);
-            Euclids.Add(euclidEntity);
-
+            try
+            {
+                (int nod, Stopwatch time) = extendedEuclidSecond.CalculeteExtendedEuclidFirst(InputA, InputB);
+                EuclidEntity euclidEntity = new EuclidEntity(InputA, InputB, nod, time, 3);
+                Euclids.Add(euclidEntity);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         #endregion
@@ -403,6 +416,9 @@ namespace Lab.ViewModel
         {
             FlowLFSR flowLFSR = new FlowLFSR(_inputValueLab5);
             LFSRResults = new ObservableCollection<LFSRResult>(flowLFSR.RunLFSR(100));
+
+            InputTextLab52 = Convert.ToString(int.Parse(InputTextLab5), 2).PadLeft(32, '0');
+            OutputTextLab5 = string.Join("", LFSRResults.Select(r => r.OutputBit.ToString()));
         }
 
         #endregion
